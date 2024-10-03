@@ -5,7 +5,7 @@ def get_images_as_list(directory): #get images and checks if the file name after
     images_list = []
 
     for file in os.listdir(directory):
-        if file.split('.')[-1].lower() in accepted_files:
+        if file.split('.')[-1].lower() in accepted_files: #returns only correct file types
             images_list.append(file)
     return images_list
 
