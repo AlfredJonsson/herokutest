@@ -55,9 +55,10 @@ class LoginForm(FlaskForm):
 
 @app.route('/')
 def home():
-    return render_template('index.html')
-
-
+    image_directory = 'static/images' #to load dynamically
+    images = get_images_as_list(image_directory)
+    return render_template('index.html', images=images)
+    
 @app.route('/aboutus')
 def about_us():
     return render_template('aboutus.html')
