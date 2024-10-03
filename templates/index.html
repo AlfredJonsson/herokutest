@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Gallery</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -61,22 +62,35 @@
 <body>
 <div class="container">
     <h1>By Bjørgvinson. An extraordinary good carpenter</h1>
-
-    <h2>Handmade chairs</h2>
-    <img src="{{ url_for('static', filename='images/testbild.png') }}" alt="Example Image">
-
-    <h2>Handmade bench</h2>
-    <img src="{{ url_for('static', filename='images/testbild2.png') }}" alt="Example Image">
-
-    <button onclick="window.location.href='{{ url_for('admin') }}'">Go to Admin Page</button>
+    <h2>Handmade Products</h2>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="10000">
+        <ol class="carousel-indicators">
+            {% for i in range(images|length) %}
+            <li data-target="#carouselExampleIndicators" data-slide-to="{{ i }}" class="{% if i == 0 %}active{% endif %}"></li>
+            {% endfor %}
+        </ol>
+        <div class="carousel-inner">
+            {% for image in images %}
+            <div class="carousel-item {% if loop.index0 == 0 %}active{% endif %}">
+                <img src="{{ url_for('static', filename='images/' ~ image) }}" class="d-block w-100" alt="...">
+            </div>
+            {% endfor %}
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
 
     <div class="about-us">
         <h2>About Us</h2>
         <p>We are a small carpentry company that specializes in handmade stuff.
             Our products are personally made by Agust, in Esbjerg in western Jutland
         </p>
-
-
 
         <p>Please use the form below to contact us.</p>
         <form method="POST" action="{{ url_for('contact') }}">
@@ -100,6 +114,13 @@
         {% endif %}
         {% endwith %}
     </div>
+
+
+    <button onclick="window.location.href='{{ url_for('admin') }}'">Go to Admin Page</button>
+
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
