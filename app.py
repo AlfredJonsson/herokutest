@@ -60,20 +60,6 @@ def home():
     images = get_images_as_list(image_directory)
     return render_template('index.html', images=images)
     
-@app.route('/aboutus')
-def about_us():
-    return render_template('aboutus.html')
-
-
-@app.route('/search')
-def search():
-    return render_template('search.html')
-
-
-@app.route('/cart')
-def cart():
-    return render_template('cart.html')
-
 
 @app.route('/contact', methods=['POST'])
 def contact():
